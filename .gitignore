@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+ex00/Animal
 
 # Temporary files
 .cache_exists

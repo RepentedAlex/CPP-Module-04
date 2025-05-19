@@ -4,50 +4,51 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+#define BLUE	"\033[34m"
+#define RESET	"\033[0m"
+
+#define PRINT_SECTION(x) \
+do { \
+	std::cout << BLUE x RESET << std::endl; \
+} while (0)
+
 int main()
 {
-	std::cout << "Test correct" << std::endl;
-	std::cout << "Instanciation des objets" << std::endl;
+	PRINT_SECTION("### TEST CORRECT ###");
+	PRINT_SECTION("\tInstanciation des objets");
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
-	std::cout << "Fin Instanciation des objets" << std::endl;
-	std::cout << "Affichage des types" << std::endl;
+	PRINT_SECTION("\tAffichage des types");
 	std::cout << j->getType() << " " << std::endl;
 	std::cout << i->getType() << " " << std::endl;
-	std::cout << "Fin Affichage des types" << std::endl;
-	std::cout << "Les sons" << std::endl;
+	PRINT_SECTION("\tLes sons");
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
 	meta->makeSound();
-	std::cout << "Fin Des sons" << std::endl;
 
-	std::cout << "Delete des allocations" << std::endl;
+	PRINT_SECTION("\tDelete des allocations");
 	delete j;
 	delete i;
 	delete meta;
-	std::cout << "Fin Delete des allocations" << std::endl;
 
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 
-	std::cout << "Test WrongAnimal et WrongCat" << std::endl;
-	std::cout << "Instanciation des objets" << std::endl;
+	PRINT_SECTION("### TEST WRONGANIMAL/WRONGCAT");
+	PRINT_SECTION("\tInstanciation des objets");
 	const WrongAnimal* w_meta = new WrongAnimal();
 	const WrongAnimal* w_i = new WrongCat();
-	std::cout << "Fin Instanciation des objets" << std::endl;
-	std::cout << "Affichage des types" << std::endl;
+	PRINT_SECTION("\tAffichage des types");
 	std::cout << w_i->getType() << " " << std::endl;
-	std::cout << "Fin Affichage des types" << std::endl;
-	std::cout << "Les sons" << std::endl;
+	PRINT_SECTION("\tLes sons");
 	w_i->makeSound(); //will output the cat sound!
 	w_meta->makeSound();
-	std::cout << "Fin Des sons" << std::endl;
 
-	std::cout << "Delete des allocations" << std::endl;
+	PRINT_SECTION("\tDelete des allocations");
 	delete w_i;
 	delete w_meta;
-	std::cout << "Fin Delete des allocations" << std::endl;
-	return 0;
+
+	return (0);
 }
 
 // int	main()

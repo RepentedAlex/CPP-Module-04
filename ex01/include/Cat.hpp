@@ -21,6 +21,7 @@ class	Cat : public Animal
 			void				setType(std::string type);
 		// Member functions
 			virtual void		makeSound() const;
+			void				printIdeas() const;
 	protected:
 
 	private:

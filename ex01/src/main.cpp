@@ -1,4 +1,7 @@
+#include <cstdio>
+#include <exception>
 #include <vector>
+#include <cstdlib>
 
 #include "Animal.hpp"
 #include "Cat.hpp"
@@ -26,7 +29,7 @@ int main()
 			if (!array[i])
 			{
 				std::cerr << "Cat allocation failed";
-				exit(1);
+				std::abort();
 			}
 		}
 		else
@@ -35,7 +38,7 @@ int main()
 			if (!array[i])
 			{
 				std::cerr << "Dog allocation failed";
-				exit(1);
+				std::abort();
 			}
 		}
 	}
@@ -68,6 +71,31 @@ int main()
 		a->setIdea(101, "Ouaf");
 
 		Dog	*b = new Dog(*a);
+
+		if (b == NULL)
+		{
+			perror("Allocation failed");
+			std::cerr << "Exiting the process now" << std::endl;
+			exit(1);
+		}
+		std::cout << std::endl;
+
+		PRINT_SECTION("Testing");
+		std::cout << "The " << a->getType() << " a has the following ideas: " << std::endl;
+		a->printIdeas();
+		std::cout << std::endl;
+
+		PRINT_SECTION("Deconstructing");
+		delete (a);
+		std::cout << std::endl;
+
+		PRINT_SECTION("Testing");
+		std::cout << "The " << b->getType() << " b has the following: " << std::endl;
+		b->printIdeas();
+		std::cout << std::endl;
+
+		PRINT_SECTION("Deconstructing");
+		delete (b);
 	}
 
 	return (0);

@@ -1,3 +1,7 @@
+#include <csignal>
+#include <cstdlib>
+#include <iostream>
+
 #include "Dog.hpp"
 
 ///CONSTRUCTORS/////////////////////////////////////////////////////////////////
@@ -29,7 +33,13 @@ Dog &Dog::operator=(Dog const &original)
 	if (this == &original)
 		return (*this);
 	this->_type = original._type;
-	this->_brain = original._brain;
+	this->_brain = new Brain;
+	if (!this->_brain)
+	{
+		std::cerr << "Allocation failed" << std::endl;
+		std::abort();
+	}
+	*this->_brain = *original._brain;
 	return (*this);
 }
 
@@ -54,4 +64,12 @@ void	Dog::setType(std::string type)
 void	Dog::makeSound() const
 {
 	std::cout << "Ouaf ouaf" << std::endl;
+}
+
+void	Dog::printIdeas() const
+{
+	for (size_t i = 0 ; i < 100 ; i++)
+	{
+	  std::cout << "idea [" << i << "]: " << this->_brain->getIdea(i) << std::endl;
+	}
 }

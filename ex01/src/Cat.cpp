@@ -1,3 +1,7 @@
+#include <csignal>
+#include <cstdlib>
+#include <iostream>
+
 #include "Cat.hpp"
 
 ///CONSTRUCTORS/////////////////////////////////////////////////////////////////
@@ -29,7 +33,13 @@ Cat &Cat::operator=(Cat const &original)
 	if (this == &original)
 		return (*this);
 	this->_type = original._type;
-	this->_brain = original._brain;
+	this->_brain = new Brain;
+	if (!this->_brain)
+	{
+		std::cerr << "Allocation failed" << std::endl;
+		std::abort();
+	}
+	*this->_brain = *original._brain;
 	return (*this);
 }
 
@@ -55,3 +65,12 @@ void	Cat::makeSound() const
 {
 	std::cout << "Miaou miaou les pétasses ?" << std::endl;
 }
+
+void	Cat::printIdeas() const
+{
+	for (size_t i = 0 ; i < 100 ; i++)
+	{
+	  std::cout << "idea [" << i << "]: " << this->_brain->getIdea(i) << std::endl;
+	}
+}
+

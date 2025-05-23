@@ -26,13 +26,29 @@ Brain	&Brain::operator=(const Brain &original)
 	PRINT_42;
 	if (this == &original)
 		return (*this);
+	for (size_t i = 0 ; i < 100 ; i++)
+	{
+		if (!original._ideas->empty())
+			this->_ideas[i].assign(original._ideas[i]);
+	}
 	return (*this);
 }
 
 ///GETTERS//////////////////////////////////////////////////////////////////////
-std::string const	getIdeas() const
+std::string const	Brain::getIdea(size_t index) const
 {
-	return 
+	if (index < 100)
+		return (this->_ideas[index]);
+	else
+		return (NULL);
+}
+
+std::string const	*Brain::getIdeaREF(size_t index) const
+{
+	if (index < 100)
+		return (&this->_ideas[index]);
+	else
+		return (NULL);
 }
 
 ///SETTERS//////////////////////////////////////////////////////////////////////

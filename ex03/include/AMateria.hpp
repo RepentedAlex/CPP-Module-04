@@ -2,30 +2,31 @@
 #define AMATERIA_HPP
 
 #include <string>
+#include <iostream>
+
+#define PRINT_42 \
+do { \
+	std::cout << __PRETTY_FUNCTION__ << "\t called" << std::endl; \
+} while (0)
 
 class ICharacter;
 
 class AMateria
 {
 	protected:
-	
+		std::string	_type;
+
 	public:
 		// Constructors
-			AMateria();
 			AMateria(std::string const &type);
-			AMateria(const AMateria &original);
 		// Destructors
-			~AMateria();
+			virtual ~AMateria();
 		// Operator overloads
-			AMateria &operator=(const AMateria &) = default;
 		// Getters
-			std::string const &getType() const;
+			virtual std::string const &getType() const = 0;
 		// Member functions
 			virtual AMateria	*clone() const = 0;
-			virtual void		use(ICharacter &target);
-
-	private:
-	
+			virtual void		use(ICharacter &target) = 0;
 };
 
 #endif // AMATERIA_HPP

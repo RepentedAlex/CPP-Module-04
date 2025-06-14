@@ -12,7 +12,9 @@ SRC_FIL		=	\
 				main \
 				AMateria \
 				Character \
-				ICharacter
+				ICharacter \
+				Cure \
+				Ice
 
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FIL)))
 OBJ			=	$(addprefix $(BUI_DIR), $(addsuffix .o, $(SRC_FIL)))

@@ -20,7 +20,7 @@ class Brain
 			Brain &operator=(const Brain &original);
 		// Getters
 			std::string const	getIdea(size_t index) const;
-			std::string const	*getIdeaREF(size_t index) const;
+			/*std::string const	*getIdeaREF(size_t index) const;*/
 		// Setters
 			void				setIdea(int i, std::string str);
 		// Member functions

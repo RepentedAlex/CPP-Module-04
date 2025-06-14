@@ -43,13 +43,13 @@ std::string const	Brain::getIdea(size_t index) const
 		return (NULL);
 }
 
-std::string const	*Brain::getIdeaREF(size_t index) const
-{
-	if (index < 100)
-		return (&this->_ideas[index]);
-	else
-		return (NULL);
-}
+/*std::string const	*Brain::getIdeaREF(size_t index) const*/
+/*{*/
+/*	if (index < 100)*/
+/*		return (&this->_ideas[index]);*/
+/*	else*/
+/*		return (NULL);*/
+/*}*/
 
 ///SETTERS//////////////////////////////////////////////////////////////////////
 void	Brain::setIdea(int i, std::string str)

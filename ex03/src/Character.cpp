@@ -26,9 +26,7 @@ Character::~Character()
 {
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		if (this->_inventory[i] != NULL)
-		{
 			delete this->_inventory[i];
-		}
 }
 
 ///OPERATOR OVERLOADS///////////////////////////////////////////////////////////
@@ -84,7 +82,7 @@ void				Character::equip(AMateria *m)
 
 void				Character::unequip(int idx)
 {
-	if (this->_inventory[idx])
+	if ((idx >= 0 && idx < MAX_INVENTORY_SIZE) && this->_inventory[idx])
 		this->_inventory[idx] = NULL;
 	else
 		std::cout << "No item on slot " << idx << std::endl;

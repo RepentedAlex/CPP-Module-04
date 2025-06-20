@@ -107,6 +107,7 @@ int	main()
 		PRINT("Freeing place in slot 2");
 		lockne.unequip(2);
 		lockne.equip(&i5);
+
 	}
 
 	std::cout << std::endl;
@@ -159,8 +160,10 @@ int	main()
 		AMateria	*tmp;
 		tmp = src->createMateria("ice");
 		me->equip(tmp);
+		delete tmp;
 		tmp = src->createMateria("cure");
 		me->equip(tmp);
+		delete tmp;
 
 		ICharacter	*bob = new Character("bob");
 

@@ -1,19 +1,37 @@
 #include "AMateria.hpp"
 
 ///CONSTRUCTORS/////////////////////////////////////////////////////////////////
-AMateria::AMateria(std::string const &type) : _type(type)
+AMateria::AMateria() : _type("none")
 {
-	PRINT_42;
+	/*PRINT_42;*/
 }
 
-AMateria::~AMateria()
+AMateria::AMateria(std::string const &type) : _type(type)
 {
-	PRINT_42;
+	/*PRINT_42;*/
+}
+
+AMateria::AMateria(const AMateria &original)
+{
+	/*PRINT_42;*/
+	*this = original;
 }
 
 ///DESTRUCTORS//////////////////////////////////////////////////////////////////
+AMateria::~AMateria()
+{
+	/*PRINT_42;*/
+}
 
 ///OPERATOR OVERLOADS///////////////////////////////////////////////////////////
+AMateria	&AMateria::operator=(const AMateria &original)
+{
+	if (this != &original)
+	{
+		this->_type = original.getType();
+	}
+	return (*this);
+}
 
 ///GETTERS//////////////////////////////////////////////////////////////////////
 std::string const &AMateria::getType() const
@@ -22,6 +40,11 @@ std::string const &AMateria::getType() const
 }
 
 ///SETTERS//////////////////////////////////////////////////////////////////////
+void	AMateria::setType(const std::string type)
+{
+	if (this->getType().compare(type) != 0)
+		this->_type = type;
+}
 
 ///MEMBER FUNCTIONS/////////////////////////////////////////////////////////////
 void	AMateria::use(ICharacter &target)

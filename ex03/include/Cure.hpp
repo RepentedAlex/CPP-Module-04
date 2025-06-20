@@ -14,7 +14,6 @@ class Cure : public AMateria
 		// Operator overloads
 			Cure	&operator=(Cure const &original);
 		// Getters
-			std::string const	&getType() const;
 		// Setters
 		// Member functions
 			Cure				*clone() const;

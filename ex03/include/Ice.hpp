@@ -14,7 +14,6 @@ class Ice : public AMateria
 		// Operator overloads
 			Ice	&operator=(Ice const &original);
 		// Getters
-			std::string const	&getType() const;
 		// Setters
 		// Member functions
 			Ice					*clone() const;

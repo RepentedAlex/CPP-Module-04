@@ -30,16 +30,11 @@ Cure &Cure::operator=(const Cure &original)
 }
 
 ///GETTERS//////////////////////////////////////////////////////////////////////
-std::string const &Cure::getType() const
-{
-	return (this->_type);
-}
 
 ///MEMBER FUNCTIONS/////////////////////////////////////////////////////////////
 Cure	*Cure::clone() const
 {
 	Cure	*ret = new Cure(*this);
-
 	return (ret);
 }
 void		Cure::use(ICharacter &target)

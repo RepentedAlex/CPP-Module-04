@@ -6,13 +6,16 @@ Character::Character() : _name("Missing_name")
 {
 	PRINT_42;
 
-	for (int i = 0 ; i < 4 ; i++)
+	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		this->_inventory[i] = NULL;
 }
 
 Character::Character(std::string name) : _name(name)
 {
 	PRINT_42;
+
+	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
+		this->_inventory[i] = NULL;
 }
 
 Character::Character(const Character &original)
@@ -27,7 +30,8 @@ Character::~Character()
 	PRINT_42;
 
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
-		this->unequip(i);
+		if (this->_inventory[i] != NULL)
+			this->unequip(i);
 }
 
 ///OPERATOR OVERLOADS///////////////////////////////////////////////////////////
@@ -52,9 +56,9 @@ std::string const	&Character::getName() const
 ///MEMBER FUNCTIONS/////////////////////////////////////////////////////////////
 bool	Character::checkInventoryFull() const
 {
-	for(int i = 0 ; i < 4 ; i++)
+	for(int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 	{
-		if (this->_inventory[i])
+		if (this->_inventory[i] == NULL)
 			return (false);
 	}
 	return (true);
@@ -63,7 +67,7 @@ bool	Character::checkInventoryFull() const
 void	Character::copyInventory(const Character &original)
 {
 	if (this != &original)
-		for (int i = 0 ; i < 4 ; i++)
+		for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 			this->_inventory[i] = original._inventory[i];
 }
 
@@ -73,15 +77,19 @@ void				Character::equip(AMateria *m)
 	if (this->checkInventoryFull() == false)
 	{
 		int	i = 0;
-		while(!this->_inventory[i])
+		while(i < MAX_INVENTORY_SIZE && this->_inventory[i])
 			i++;
+		this->_inventory[i] = m->clone();
 	}
 }
 
 void				Character::unequip(int idx)
 {
 	if (this->_inventory[idx])
+	{
 		delete this->_inventory[idx];
+		this->_inventory[idx] = NULL;
+	}
 }
 
 void				Character::use(int idx, ICharacter &target)

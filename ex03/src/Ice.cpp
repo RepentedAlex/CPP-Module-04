@@ -3,12 +3,12 @@
 #include "ICharacter.hpp"
 
 ///CONSTRUCTORS/////////////////////////////////////////////////////////////////
-Ice::Ice() : AMateria("cure")
+Ice::Ice() : AMateria("ice")
 {
 
 }
 
-Ice::Ice(Ice const &original) : AMateria("cure")
+Ice::Ice(Ice const &original) : AMateria("ice")
 {
 	*this = original;
 }
@@ -30,10 +30,6 @@ Ice &Ice::operator=(const Ice &original)
 }
 
 ///GETTERS//////////////////////////////////////////////////////////////////////
-std::string const &Ice::getType() const
-{
-	return (this->_type);
-}
 
 ///MEMBER FUNCTIONS/////////////////////////////////////////////////////////////
 Ice	*Ice::clone() const

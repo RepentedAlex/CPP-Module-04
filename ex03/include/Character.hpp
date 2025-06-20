@@ -36,7 +36,7 @@ class Character : public ICharacter
 
 	private:
 		std::string	_name;
-		AMateria	*_inventory[4];
+		AMateria	*_inventory[MAX_INVENTORY_SIZE];
 };
 
 #endif // CHARACTER_HPP

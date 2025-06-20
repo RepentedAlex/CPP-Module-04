@@ -13,7 +13,7 @@ MateriaSource::MateriaSource()
 MateriaSource::~MateriaSource()
 {
 	for (int i = 0 ; i < MAX_LEARNT_MATERIAS ; i++)
-		if (this->_learntMaterias[i])
+		if (this->_learntMaterias[i] != NULL)
 			delete this->_learntMaterias[i];
 }
 
@@ -53,11 +53,18 @@ void	MateriaSource::learnMateria(AMateria *ptr)
 	}
 }
 
-void		MateriaSource::copyLearntMaterias(const MateriaSource &original)
+void	MateriaSource::copyLearntMaterias(const MateriaSource &original)
 {
-	if (this != &original)
-		for (int i = 0 ; i < MAX_LEARNT_MATERIAS ; i++)
-			this->_learntMaterias[i] = original._learntMaterias[i];
+	for (int i = 0; i < MAX_LEARNT_MATERIAS; ++i)
+	{
+		if (this->_learntMaterias[i])
+		{
+			delete this->_learntMaterias[i];
+			this->_learntMaterias[i] = NULL;
+		}
+		if (original._learntMaterias[i])
+			this->_learntMaterias[i] = original._learntMaterias[i]->clone();
+	}
 }
 
 AMateria		*MateriaSource::createMateria(std::string const &type)

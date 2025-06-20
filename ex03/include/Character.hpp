@@ -11,6 +11,7 @@ do { \
 	std::cout << __PRETTY_FUNCTION__ << "\t called" << std::endl; \
 } while (0)
 
+#define FLOOR_SIZE 50
 #define MAX_INVENTORY_SIZE 4
 
 class Character : public ICharacter
@@ -34,9 +35,12 @@ class Character : public ICharacter
 			void				unequip(int idx);
 			void				use(int idx, ICharacter &target);
 
+		static AMateria	*_floor[FLOOR_SIZE];
+
 	private:
 		std::string	_name;
 		AMateria	*_inventory[MAX_INVENTORY_SIZE];
+		static int	_nbCharacters;
 };
 
 #endif // CHARACTER_HPP

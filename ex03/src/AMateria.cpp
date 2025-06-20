@@ -3,24 +3,21 @@
 ///CONSTRUCTORS/////////////////////////////////////////////////////////////////
 AMateria::AMateria() : _type("none")
 {
-	/*PRINT_42;*/
 }
 
 AMateria::AMateria(std::string const &type) : _type(type)
 {
-	/*PRINT_42;*/
 }
 
 AMateria::AMateria(const AMateria &original)
 {
-	/*PRINT_42;*/
 	*this = original;
 }
 
 ///DESTRUCTORS//////////////////////////////////////////////////////////////////
 AMateria::~AMateria()
 {
-	/*PRINT_42;*/
+
 }
 
 ///OPERATOR OVERLOADS///////////////////////////////////////////////////////////

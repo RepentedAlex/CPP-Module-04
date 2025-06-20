@@ -11,7 +11,9 @@ Character::Character() : _name("Missing_name")
 Character::Character(std::string name) : _name(name)
 {
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
+	{
 		this->_inventory[i] = NULL;
+	}
 }
 
 Character::Character(const Character &original)
@@ -22,13 +24,10 @@ Character::Character(const Character &original)
 ///DESTRUCTORS//////////////////////////////////////////////////////////////////
 Character::~Character()
 {
-	AMateria	*ptr;
-
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		if (this->_inventory[i] != NULL)
 		{
-			ptr = this->_inventory[i];
-			/*delete ptr;*/
+			delete this->_inventory[i];
 		}
 }
 
@@ -76,7 +75,7 @@ void				Character::equip(AMateria *m)
 		int	i = 0;
 		while(i < MAX_INVENTORY_SIZE && this->_inventory[i])
 			i++;
-		this->_inventory[i] = m;
+		this->_inventory[i] = m->clone();
 		std::cout << "Materia added in slot " << i << std::endl;
 	}
 	else
@@ -87,6 +86,8 @@ void				Character::unequip(int idx)
 {
 	if (this->_inventory[idx])
 		this->_inventory[idx] = NULL;
+	else
+		std::cout << "No item on slot " << idx << std::endl;
 }
 
 void				Character::use(int idx, ICharacter &target)

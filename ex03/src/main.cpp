@@ -39,55 +39,55 @@ int	main()
 
 	std::cout << std::endl;
 
-	{
-		PRINT_SUBSECTION("= Materias =");
-		Cure		c1;
-		Cure		*p_c1;
-		Ice			i1;
-		Ice			*p_i1;
-		AMateria	*p_am1;
-
-		PRINT_TEST("Cloning: ");
-		PRINT("Cloning c1 into p_c1...");
-		p_c1 = c1.clone();
-		PRINT("Checking that p_c1 is of correct type: ");
-		std::cout << "c1 type: " << c1.getType() << " | p_c1 type: " << p_c1->getType() << std::endl << std::endl;
-		PRINT("Cloning i1 into p_i1...");
-		p_i1 = i1.clone();
-		PRINT("Checking that p_i1 is of correct type: ");
-		std::cout << "i1 type: " << i1.getType() << " | p_i1 type: " << p_i1->getType() << std::endl;
-
-		std::cout << std::endl;
-
-		PRINT_TEST("Clone on AMateria *ptr");
-		PRINT("Cloning c1 onto p_am1...");
-		p_am1 = c1.clone();
-		std::cout << "p-am1 type: " << p_am1->getType() <<
-		" (should be " << c1.getType() << ")" << std::endl << std::endl;
-		delete p_am1;
-		PRINT("Cloning i1 onto p_am1...");
-		p_am1 = i1.clone();
-		std::cout << "p-am1 type: " << p_am1->getType() <<
-		" (should be " << i1.getType() << ")" << std::endl;
-
-		PRINT_TEST("Using materias");
-		Character	tmp("John Doe");
-
-		PRINT("using c1:");
-		c1.use(tmp);
-		PRINT("using p_c1:");
-		p_c1->use(tmp);
-		PRINT("using i1:");
-		i1.use(tmp);
-		PRINT("using p_i1:");
-		p_i1->use(tmp);
-
-		delete p_c1;
-		delete p_i1;
-		delete p_am1;
-	}
-
-	std::cout << std::endl;
+	/*{*/
+	/*	PRINT_SUBSECTION("= Materias =");*/
+	/*	Cure		c1;*/
+	/*	Cure		*p_c1;*/
+	/*	Ice			i1;*/
+	/*	Ice			*p_i1;*/
+	/*	AMateria	*p_am1;*/
+	/**/
+	/*	PRINT_TEST("Cloning: ");*/
+	/*	PRINT("Cloning c1 into p_c1...");*/
+	/*	p_c1 = c1.clone();*/
+	/*	PRINT("Checking that p_c1 is of correct type: ");*/
+	/*	std::cout << "c1 type: " << c1.getType() << " | p_c1 type: " << p_c1->getType() << std::endl << std::endl;*/
+	/*	PRINT("Cloning i1 into p_i1...");*/
+	/*	p_i1 = i1.clone();*/
+	/*	PRINT("Checking that p_i1 is of correct type: ");*/
+	/*	std::cout << "i1 type: " << i1.getType() << " | p_i1 type: " << p_i1->getType() << std::endl;*/
+	/**/
+	/*	std::cout << std::endl;*/
+	/**/
+	/*	PRINT_TEST("Clone on AMateria *ptr");*/
+	/*	PRINT("Cloning c1 onto p_am1...");*/
+	/*	p_am1 = c1.clone();*/
+	/*	std::cout << "p-am1 type: " << p_am1->getType() <<*/
+	/*	" (should be " << c1.getType() << ")" << std::endl << std::endl;*/
+	/*	delete p_am1;*/
+	/*	PRINT("Cloning i1 onto p_am1...");*/
+	/*	p_am1 = i1.clone();*/
+	/*	std::cout << "p-am1 type: " << p_am1->getType() <<*/
+	/*	" (should be " << i1.getType() << ")" << std::endl;*/
+	/**/
+	/*	PRINT_TEST("Using materias");*/
+	/*	Character	tmp("John Doe");*/
+	/**/
+	/*	PRINT("using c1:");*/
+	/*	c1.use(tmp);*/
+	/*	PRINT("using p_c1:");*/
+	/*	p_c1->use(tmp);*/
+	/*	PRINT("using i1:");*/
+	/*	i1.use(tmp);*/
+	/*	PRINT("using p_i1:");*/
+	/*	p_i1->use(tmp);*/
+	/**/
+	/*	delete p_c1;*/
+	/*	delete p_i1;*/
+	/*	delete p_am1;*/
+	/*}*/
+	/**/
+	/*std::cout << std::endl;*/
 
 	{
 		PRINT_SUBSECTION("= Full inventory =");

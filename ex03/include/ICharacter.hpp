@@ -5,11 +5,17 @@
 
 #include "AMateria.hpp"
 
+//
+// t_class
+//		v_table table
+//		void	*function_or_class(functions + variables)
+//
+
 class ICharacter
 {
 	public:
 		// Constructors
-			 ICharacter();
+			ICharacter();
 		// Destructors;
 			virtual ~ICharacter();
 		// Operator overloads

@@ -17,53 +17,43 @@ do { \
 	std::cout << BLUE x RESET << std::endl; \
 } while (0)
 
+/*int j= 0;*/
+/*while (j < 10 && (delete array[j++], true));*/
+
 int main()
 {
-	const Animal	*array[10];
-
-	for (int i = 0 ; i < 10 ; i++)
+	PRINT_SECTION("### TESTING ARRAY ###");
 	{
-		if (i % 2)
+		const Animal	*array[10];
+
+		for (int i = 0 ; i < 10 ; i++)
 		{
-			array[i] = new Cat();
+			if (i % 2)
+				array[i] = new Cat();
+			else
+				array[i] = new Dog();
 			if (!array[i])
 			{
-				std::cerr << "Cat allocation failed";
-				std::abort();
+				for (int j = 0; j < i; delete array[j++]);
+				throw std::runtime_error("Allocation failed");
 			}
 		}
-		else
+
+		for (int j = 0 ; j < 10 ; j++)
 		{
-			array[i] = new Dog();
-			if (!array[i])
-			{
-				std::cerr << "Dog allocation failed";
-				std::abort();
-			}
+			std::cout << array[j]->getType() << std::endl;
+			array[j]->makeSound();
+			std::cout << std::endl;
 		}
-	}
 
-	for (int j = 0 ; j < 10 ; j++)
-	{
-		std::cout << array[j]->getType() << std::endl;
-		array[j]->makeSound();
-		std::cout << std::endl;
+		for (int j = 0 ; j < 10 ; delete array[j++]);
 	}
-
-	for (int j = 0 ; j < 10 ; j++)
-	{
-		delete array[j];
-	}
-
 	PRINT_SECTION("### TESTING DEEP COPIES ###");
 	{
 		PRINT_SECTION("\tConstructing");
 		Dog	*a = new Dog();
 		if (!a)
-		{
-			std::cerr << "Allocation failed" << std::endl;
-			exit(1);
-		}
+			throw std::runtime_error("Allocation failed");
 
 		a->setIdea(0, "Payer les impots.");
 		a->setIdea(1, "Monter le dossier pour les APL.");
@@ -72,11 +62,9 @@ int main()
 
 		Dog	*b = new Dog(*a);
 
-		if (b == NULL)
-		{
-			perror("Allocation failed");
-			std::cerr << "Exiting the process now" << std::endl;
-			exit(1);
+		if (b == NULL) {
+			delete a;
+			throw std::runtime_error("Allocation failed");
 		}
 		std::cout << std::endl;
 

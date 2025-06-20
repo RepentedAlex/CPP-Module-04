@@ -19,9 +19,17 @@ do { \
 
 int main()
 {
-	Dog	a;
-	Cat	b;
+	A_Animal	*dog = new Dog();
+	A_Animal	*cat = new Cat();
+//	A_Animal	*ani = new A_Animal();  // Abstract class should fail to compile if uncomnmented
 
+	dog->makeSound();
+	cat->makeSound();
+//	ani->makeSound();
+
+	delete dog;
+	delete cat;
+//	delete ani;
 	return (0);
 }
 

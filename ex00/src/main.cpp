@@ -20,8 +20,9 @@ int main()
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	PRINT_SECTION("\tAffichage des types");
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+	std::cout << meta->getType() << std::endl;
+	std::cout << j->getType() << std::endl;
+	std::cout << i->getType() << std::endl;
 	PRINT_SECTION("\tLes sons");
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
@@ -39,7 +40,8 @@ int main()
 	const WrongAnimal* w_meta = new WrongAnimal();
 	const WrongAnimal* w_i = new WrongCat();
 	PRINT_SECTION("\tAffichage des types");
-	std::cout << w_i->getType() << " " << std::endl;
+	std::cout << "wrong_cat " << w_i->getType()<< std::endl;
+	std::cout << "wrong_animal " << w_meta->getType() << std::endl;
 	PRINT_SECTION("\tLes sons");
 	w_i->makeSound(); //will output the cat sound!
 	w_meta->makeSound();

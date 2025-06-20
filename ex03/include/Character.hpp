@@ -11,11 +11,14 @@ do { \
 	std::cout << __PRETTY_FUNCTION__ << "\t called" << std::endl; \
 } while (0)
 
+#define MAX_INVENTORY_SIZE 4
+
 class Character : public ICharacter
 {
 	public:
 		// Constructors
 			Character();
+			Character(std::string name);
 			Character(const Character &original);
 		// Destructors
 			~Character();
@@ -25,6 +28,8 @@ class Character : public ICharacter
 			std::string const	&getName() const;
 		// Setters
 		// Member functions
+			bool				checkInventoryFull() const;
+			void				copyInventory(const Character &original);
 			void				equip(AMateria *m);
 			void				unequip(int idx);
 			void				use(int idx, ICharacter &target);

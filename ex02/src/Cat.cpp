@@ -10,6 +10,8 @@ Cat::Cat() : A_Animal()
 	PRINT_42;
 	this->_type = "Cat";
 	this->_brain = new Brain;
+	if (!this->_brain)
+		throw std::runtime_error("Allocation failed");
 }
 
 Cat::Cat(Cat const &original) : A_Animal()
@@ -35,10 +37,7 @@ Cat &Cat::operator=(Cat const &original)
 	this->_type = original._type;
 	this->_brain = new Brain;
 	if (!this->_brain)
-	{
-		std::cerr << "Allocation failed" << std::endl;
-		std::abort();
-	}
+		throw std::runtime_error("Allocation failed");
 	*this->_brain = *original._brain;
 	return (*this);
 }
@@ -70,7 +69,8 @@ void	Cat::printIdeas() const
 {
 	for (size_t i = 0 ; i < 100 ; i++)
 	{
-	  std::cout << "idea [" << i << "]: " << this->_brain->getIdea(i) << std::endl;
+		if (this->_brain->getIdea(i).empty())
+			continue;
+		std::cout << "idea [" << i << "]: " << this->_brain->getIdea(i) << std::endl;
 	}
 }
-

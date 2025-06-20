@@ -32,6 +32,8 @@
 *.app
 ex00/Animal
 ex01/Brain
+ex02/Brain
+ex03/Materia
 
 # Temporary files
 .cache_exists

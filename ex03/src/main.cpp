@@ -18,7 +18,8 @@ int	main()
 	Cure		*c2;
 	Ice			i1;
 	Ice			*i2;
-	Character	char1;
+	Character	char1("Malingen");
+	Character	char2;
 
 	PRINT_SECTION("=== TESTING ===");
 	std::cout << "c1 is of type: " << c1.getType() << std::endl;
@@ -33,6 +34,11 @@ int	main()
 	i2 = i1.clone();
 	std::cout << "i2 is of type: " << i2->getType() << std::endl;
 	i2->use(char1);
+
+	char1.equip(c2);
+	char1.use(0, char2);
+	char1.use(1, char2);
+	char1.use(0, char1);
 
 	PRINT_SECTION("=== DESTRUCTING ===");
 	delete c2;

@@ -4,31 +4,24 @@
 ///CONSTRUCTORS/////////////////////////////////////////////////////////////////
 Character::Character() : _name("Missing_name")
 {
-	PRINT_42;
-
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		this->_inventory[i] = NULL;
 }
 
 Character::Character(std::string name) : _name(name)
 {
-	PRINT_42;
-
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		this->_inventory[i] = NULL;
 }
 
 Character::Character(const Character &original)
 {
-	PRINT_42;
 	*this = original;
 }
 
 ///DESTRUCTORS//////////////////////////////////////////////////////////////////
 Character::~Character()
 {
-	PRINT_42;
-
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		if (this->_inventory[i] != NULL)
 			this->unequip(i);
@@ -80,7 +73,10 @@ void				Character::equip(AMateria *m)
 		while(i < MAX_INVENTORY_SIZE && this->_inventory[i])
 			i++;
 		this->_inventory[i] = m->clone();
+		std::cout << "Materia added in slot " << i << std::endl;
 	}
+	else
+		std::cout << "Can't add materia, inventory is full!" << std::endl;
 }
 
 void				Character::unequip(int idx)

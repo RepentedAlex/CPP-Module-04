@@ -89,6 +89,28 @@ int	main()
 
 	std::cout << std::endl;
 
+	{
+		PRINT_SUBSECTION("= Full inventory =");
+		Character	lockne("lockne");
+		Ice	i1;
+		Ice	i2;
+		Ice	i3;
+		Ice	i4;
+		Ice	i5;
+
+		PRINT("Filling inventory...");
+		lockne.equip(&i1);
+		lockne.equip(&i2);
+		lockne.equip(&i3);
+		lockne.equip(&i4);
+		lockne.equip(&i5);
+		PRINT("Freeing place in slot 2");
+		lockne.unequip(2);
+		lockne.equip(&i5);
+	}
+
+	std::cout << std::endl;
+
 	/*{*/
 	/*	PRINT_SUBSECTION("= Characters =");*/
 	/*	Character	c1;*/

@@ -91,7 +91,7 @@ int	main()
 
 	{
 		PRINT_SUBSECTION("= Full inventory =");
-		Character	lockne("lockne");
+		Character	lockne("Lockne");
 		Ice	i1;
 		Ice	i2;
 		Ice	i3;
@@ -107,6 +107,26 @@ int	main()
 		PRINT("Freeing place in slot 2");
 		lockne.unequip(2);
 		lockne.equip(&i5);
+	}
+
+	std::cout << std::endl;
+
+	{
+		PRINT_SUBSECTION("= Unequip =");
+		Character	malingen("Malingend");
+		AMateria	*mat = new Cure();
+
+		malingen.equip(mat);
+		malingen.use(0, malingen);
+
+		malingen.unequip(0);
+		PRINT("Trying to unequip empty slot");
+		malingen.unequip(0);
+		PRINT("Trying to unequip invalid slots");
+		malingen.unequip(4);
+		malingen.unequip(-1);
+
+		delete mat;
 	}
 
 	std::cout << std::endl;
@@ -139,10 +159,8 @@ int	main()
 		AMateria	*tmp;
 		tmp = src->createMateria("ice");
 		me->equip(tmp);
-		delete tmp;
 		tmp = src->createMateria("cure");
 		me->equip(tmp);
-		delete tmp;
 
 		ICharacter	*bob = new Character("bob");
 

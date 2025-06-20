@@ -18,6 +18,14 @@ MateriaSource::~MateriaSource()
 }
 
 ///OPERATOR OVERLOADS///////////////////////////////////////////////////////////
+MateriaSource	&MateriaSource::operator=(const MateriaSource &original)
+{
+	if (this != &original)
+	{
+		this->copyLearntMaterias(original);
+	}
+	return (*this);
+}
 
 ///GETTERS//////////////////////////////////////////////////////////////////////
 
@@ -43,6 +51,13 @@ void	MateriaSource::learnMateria(AMateria *ptr)
 			i++;
 		this->_learntMaterias[i] = ptr->clone();
 	}
+}
+
+void		MateriaSource::copyLearntMaterias(const MateriaSource &original)
+{
+	if (this != &original)
+		for (int i = 0 ; i < MAX_LEARNT_MATERIAS ; i++)
+			this->_learntMaterias[i] = original._learntMaterias[i];
 }
 
 AMateria		*MateriaSource::createMateria(std::string const &type)

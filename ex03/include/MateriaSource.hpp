@@ -19,8 +19,9 @@ class MateriaSource : public IMateriaSource
 	// Setters
 	// Member functions
 		bool		checkSourceFull() const;
+		void		copyLearntMaterias(const MateriaSource &original);
 		void		learnMateria(AMateria *ptr);
-		AMateria		*createMateria(std::string const &type);
+		AMateria	*createMateria(std::string const &type);
 
 	private:
 		AMateria	*_learntMaterias[MAX_LEARNT_MATERIAS];

@@ -22,15 +22,19 @@ Character::Character(const Character &original)
 ///DESTRUCTORS//////////////////////////////////////////////////////////////////
 Character::~Character()
 {
+	AMateria	*ptr;
+
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 		if (this->_inventory[i] != NULL)
-			this->unequip(i);
+		{
+			ptr = this->_inventory[i];
+			/*delete ptr;*/
+		}
 }
 
 ///OPERATOR OVERLOADS///////////////////////////////////////////////////////////
 Character &Character::operator=(const Character &original)
 {
-	PRINT_42;
 	if (this != &original)
 	{
 		this->copyInventory(original);
@@ -72,7 +76,7 @@ void				Character::equip(AMateria *m)
 		int	i = 0;
 		while(i < MAX_INVENTORY_SIZE && this->_inventory[i])
 			i++;
-		this->_inventory[i] = m->clone();
+		this->_inventory[i] = m;
 		std::cout << "Materia added in slot " << i << std::endl;
 	}
 	else
@@ -82,10 +86,7 @@ void				Character::equip(AMateria *m)
 void				Character::unequip(int idx)
 {
 	if (this->_inventory[idx])
-	{
-		delete this->_inventory[idx];
 		this->_inventory[idx] = NULL;
-	}
 }
 
 void				Character::use(int idx, ICharacter &target)

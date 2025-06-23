@@ -182,22 +182,33 @@ int	main()
 		PRINT_SUBSECTION("= Deep copies =");
 
 		Character	*original = new Character("Original");
-		
+
 		original->equip(new Ice());
 		original->equip(new Cure());
+
+		std::cout << std::endl;
+
 		original->dumpInventory();
+
+		std::cout << std::endl;
 
 		PRINT("Creating copy");
 		Character	*copy = new Character(*original);
 		copy->dumpInventory();
 
+		std::cout << std::endl;
+
 		PRINT("Both should be able to use Materia");
 		original->use(0, *original);
 		copy->use(0, *copy);
 
+		std::cout << std::endl;
+
 		PRINT("Unequiping materia from original");
 		original->unequip(0);
 		original->use(0, *original);
+
+		std::cout << std::endl;
 
 		PRINT_TEST("Copy should still be able to use Materia");
 		copy->use(0, *copy);
@@ -213,12 +224,41 @@ int	main()
 		IMateriaSource	*src = new MateriaSource();
 
 		src->learnMateria(new Ice());
-		
+
 		AMateria *unknown = src->createMateria("fire");
 		if (!unknown)
 			std::cout << "Couldn't create unknown materia \"fire\"" << std::endl;
 
 		delete src;
+	}
+
+	std::cout << std::endl;
+
+	{
+		PRINT_SUBSECTION("= Copy of MateriaSource =");
+		MateriaSource *src = new MateriaSource();
+
+		PRINT("Filling original MateriaSource");
+		src->learnMateria(new Ice());
+		src->learnMateria(new Cure());
+
+		std::cout << std::endl;
+
+		PRINT("Original dump");
+		src->dumpMateriasLearnt();
+
+		std::cout << std::endl;
+
+		PRINT("Copying original MateriaSource");
+		MateriaSource	*copy = new MateriaSource(*src);
+
+		std::cout << std::endl;
+
+		PRINT("Copy dump");
+		copy->dumpMateriasLearnt();
+
+		delete src;
+		delete copy;
 	}
 
 	std::cout << std::endl;

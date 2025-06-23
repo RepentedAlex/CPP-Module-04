@@ -35,7 +35,6 @@ Ice &Ice::operator=(const Ice &original)
 Ice	*Ice::clone() const
 {
 	Ice	*ret = new Ice(*this);
-
 	return (ret);
 }
 void		Ice::use(ICharacter &target)

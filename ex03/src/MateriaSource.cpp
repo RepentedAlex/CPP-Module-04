@@ -9,6 +9,13 @@ MateriaSource::MateriaSource()
 		this->_learntMaterias[i] = NULL;
 }
 
+MateriaSource::MateriaSource(const MateriaSource &original)
+{
+	for (int i = 0 ; i < MAX_LEARNT_MATERIAS ; i++)
+		this->_learntMaterias[i] = NULL;
+	*this = original;
+}
+
 ///DESTRUCTORS//////////////////////////////////////////////////////////////////
 MateriaSource::~MateriaSource()
 {
@@ -42,17 +49,6 @@ bool	MateriaSource::checkSourceFull() const
 	return (true);
 }
 
-void	MateriaSource::learnMateria(AMateria *ptr)
-{
-	if (this->checkSourceFull() == false)
-	{
-		int	i = 0;
-		while (i < MAX_LEARNT_MATERIAS && this->_learntMaterias[i])
-			i++;
-		this->_learntMaterias[i] = ptr;
-	}
-}
-
 void	MateriaSource::copyLearntMaterias(const MateriaSource &original)
 {
 	for (int i = 0; i < MAX_LEARNT_MATERIAS; ++i)
@@ -76,3 +72,27 @@ AMateria		*MateriaSource::createMateria(std::string const &type)
 	}
 	return (NULL);
 }
+
+void	MateriaSource::dumpMateriasLearnt() const
+{
+	for (int i = 0 ; i < MAX_LEARNT_MATERIAS ; i++)
+	{
+		if (this->_learntMaterias[i])
+			std::cout << "Slot [" << i << "]: " << this->_learntMaterias[i]->getType() <<
+			" (" << this->_learntMaterias[i] << ')' << std::endl;
+		else
+			std::cout << "Slot [" << i << "]: Empty (" << this->_learntMaterias[i] << ')' << std::endl;
+	}
+}
+
+void	MateriaSource::learnMateria(AMateria *ptr)
+{
+	if (this->checkSourceFull() == false)
+	{
+		int	i = 0;
+		while (i < MAX_LEARNT_MATERIAS && this->_learntMaterias[i])
+			i++;
+		this->_learntMaterias[i] = ptr;
+	}
+}
+

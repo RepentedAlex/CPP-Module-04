@@ -20,6 +20,7 @@ class MateriaSource : public IMateriaSource
 	// Member functions
 		bool		checkSourceFull() const;
 		void		copyLearntMaterias(const MateriaSource &original);
+		void		dumpMateriasLearnt() const;
 		void		learnMateria(AMateria *ptr);
 		AMateria	*createMateria(std::string const &type);
 

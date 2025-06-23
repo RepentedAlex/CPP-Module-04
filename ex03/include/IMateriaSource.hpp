@@ -7,6 +7,7 @@ class	IMateriaSource
 {
 	public:
 		// Constructors
+			IMateriaSource();
 		// Deconstructors
 			virtual ~IMateriaSource();
 		// Operator overloads

@@ -109,10 +109,10 @@ void	Character::dumpInventory() const
 	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
 	{
 		if (this->_inventory[i])
-		{
 			std::cout << this->getName() << " inventory slot [" << i << "]: " <<
 			this->_inventory[i]->getType() << " (" << this->_inventory[i] << ')' << std::endl;
-		}
+		else
+			std::cout << "Slot [" << i << "]: Empty (" << this->_inventory[i] << ')' << std::endl;
 	}
 }
 

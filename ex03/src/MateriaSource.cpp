@@ -49,7 +49,7 @@ void	MateriaSource::learnMateria(AMateria *ptr)
 		int	i = 0;
 		while (i < MAX_LEARNT_MATERIAS && this->_learntMaterias[i])
 			i++;
-		this->_learntMaterias[i] = ptr->clone();
+		this->_learntMaterias[i] = ptr;
 	}
 }
 

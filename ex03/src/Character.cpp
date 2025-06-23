@@ -24,6 +24,7 @@ Character::Character(std::string name) : _name(name)
 Character::Character(const Character &original)
 {
 	_nbCharacters++;
+	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++) this->_inventory[i] = NULL;
 	*this = original;
 }
 
@@ -73,6 +74,10 @@ std::string const	&Character::getName() const
 }
 
 ///SETTERS//////////////////////////////////////////////////////////////////////
+void	Character::setName(std::string const &name)
+{
+	this->_name = name;
+}
 
 ///MEMBER FUNCTIONS/////////////////////////////////////////////////////////////
 bool	Character::checkInventoryFull() const
@@ -99,6 +104,18 @@ void	Character::copyInventory(const Character &original)
 		}
 }
 
+void	Character::dumpInventory() const
+{
+	for (int i = 0 ; i < MAX_INVENTORY_SIZE ; i++)
+	{
+		if (this->_inventory[i])
+		{
+			std::cout << this->getName() << " inventory slot [" << i << "]: " <<
+			this->_inventory[i]->getType() << " (" << this->_inventory[i] << ')' << std::endl;
+		}
+	}
+}
+
 //Need to have materias be `delete`-able
 void				Character::equip(AMateria *m)
 {
@@ -121,8 +138,13 @@ void				Character::unequip(int idx)
 {
 	if ((idx >= 0 && idx < MAX_INVENTORY_SIZE) && this->_inventory[idx])
 	{
-		for (int i = 0 ; i < FLOOR_SIZE ; i++)
+		for (int i = 0 ; i <= FLOOR_SIZE ; i++)
 		{
+			if (i == FLOOR_SIZE)
+			{
+				std::cout << "Can't unequip, floor is full!" << std::endl;
+				return ;
+			}
 			if (this->_floor[i] == NULL)
 			{
 				this->_floor[i] = this->_inventory[idx];

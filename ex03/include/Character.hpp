@@ -11,7 +11,7 @@ do { \
 	std::cout << __PRETTY_FUNCTION__ << "\t called" << std::endl; \
 } while (0)
 
-#define FLOOR_SIZE 50
+#define FLOOR_SIZE 256
 #define MAX_INVENTORY_SIZE 4
 
 class Character : public ICharacter
@@ -28,9 +28,11 @@ class Character : public ICharacter
 		// Getters
 			std::string const	&getName() const;
 		// Setters
+			void	setName(std::string const &name);
 		// Member functions
 			bool				checkInventoryFull() const;
 			void				copyInventory(const Character &original);
+			void				dumpInventory() const;
 			void				equip(AMateria *m);
 			void				unequip(int idx);
 			void				use(int idx, ICharacter &target);

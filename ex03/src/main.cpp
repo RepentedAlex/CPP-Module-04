@@ -70,6 +70,8 @@ int	main()
 		std::cout << "p-am1 type: " << p_am1->getType() <<
 		" (should be " << i1.getType() << ")" << std::endl;
 
+		std::cout << std::endl;
+
 		PRINT_TEST("Using materias");
 		Character	tmp("John Doe");
 
@@ -90,7 +92,7 @@ int	main()
 	std::cout << std::endl;
 
 	{
-		PRINT_SUBSECTION("= Full inventory =");
+		PRINT_SUBSECTION("= Inventory =");
 		Character	*lockne= new Character("Lockne");
 		Ice	*i1 = new Ice();
 		Ice	*i2 = new Ice();
@@ -98,15 +100,22 @@ int	main()
 		Ice	*i4 = new Ice();
 		Ice	*i5 = new Ice();
 
-		PRINT("Filling inventory...");
+		PRINT_TEST("Empty inventory:");
+
 		lockne->equip(i1);
 		lockne->equip(i2);
 		lockne->equip(i3);
 		lockne->equip(i4);
+		lockne->dumpInventory();
+
+		PRINT_TEST("Full inventory (inventory is full from previous test:");
 		lockne->equip(i5);
-		PRINT("Freeing place in slot 2");
+		lockne->dumpInventory();
+
+		PRINT_TEST("Empty slot in middle of inventory:");
 		lockne->unequip(2);
 		lockne->equip(i5);
+		lockne->dumpInventory();
 
 		delete lockne;
 	}
@@ -134,28 +143,91 @@ int	main()
 
 	std::cout << std::endl;
 
-	/*{*/
-	/*	PRINT_SUBSECTION("= Characters =");*/
-	/*	Character	c1;*/
-	/*	Character	*p_c1;*/
-	/*	ICharacter	*p_ic1;*/
-	/**/
-	/*	PRINT_TEST("");*/
-	/**/
-	/*	std::cout << std::endl;*/
-	/**/
-	/*	PRINT_TEST("");*/
-	/*}*/
-	/**/
-	/*std::cout << std::endl;*/
+	{
+		PRINT_SUBSECTION("= Floor =");
+		Character	*malingen = new Character("Malingen");
+		Character	*lockne = new Character("Lockne");
+		Ice	*i1 = new Ice();
+		Cure	*c1 = new Cure();
+
+		std::cout << "floor[0] type: " << " (" << Character::_floor[0] << ')' << std::endl;
+		std::cout << "floor[1] type: " << " (" << Character::_floor[0] << ')' << std::endl;
+
+		lockne->equip(i1);
+		lockne->equip(c1);
+		lockne->unequip(0);
+		lockne->unequip(1);
+
+		PRINT_TEST("Floor should hold an Ice and a Cure materia:");
+		std::cout << "floor[0] type: " << Character::_floor[0]->getType() <<
+		" (" << Character::_floor[0] << ')' << std::endl;
+		std::cout << "floor[1] type: " << Character::_floor[1]->getType() <<
+		" (" << Character::_floor[1] << ')' << std::endl;
+
+		PRINT_TEST("Deconstructing only one character, floor should not show empty:");
+		delete malingen;
+		std::cout << "floor[0] type: " << Character::_floor[0]->getType() <<
+		" (" << Character::_floor[0] << ')' << std::endl;
+		std::cout << "floor[1] type: " << Character::_floor[1]->getType() <<
+		" (" << Character::_floor[1] << ')' << std::endl;
+		PRINT_TEST("Deconstructing remaining character, floor should show empty:");
+		delete lockne;
+		std::cout << "floor[0] type: " << " (" << Character::_floor[0] << ')' << std::endl;
+		std::cout << "floor[1] type: " << " (" << Character::_floor[1] << ')' << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	{
+		PRINT_SUBSECTION("= Deep copies =");
+
+		Character	*original = new Character("Original");
+		
+		original->equip(new Ice());
+		original->equip(new Cure());
+		original->dumpInventory();
+
+		PRINT("Creating copy");
+		Character	*copy = new Character(*original);
+		copy->dumpInventory();
+
+		PRINT("Both should be able to use Materia");
+		original->use(0, *original);
+		copy->use(0, *copy);
+
+		PRINT("Unequiping materia from original");
+		original->unequip(0);
+		original->use(0, *original);
+
+		PRINT_TEST("Copy should still be able to use Materia");
+		copy->use(0, *copy);
+
+		delete original;
+		delete copy;
+	}
+
+	std::cout << std::endl;
+
+	{
+		PRINT_SUBSECTION("= Unknown Materia =");
+		IMateriaSource	*src = new MateriaSource();
+
+		src->learnMateria(new Ice());
+		
+		AMateria *unknown = src->createMateria("fire");
+		if (!unknown)
+			std::cout << "Couldn't create unknown materia \"fire\"" << std::endl;
+
+		delete src;
+	}
+
+	std::cout << std::endl;
 
 	{
 		PRINT_SUBSECTION("= Subject main =");
 		IMateriaSource	*src = new MateriaSource();
-		Ice	*p_i1 = new Ice();
-		Cure	*p_c1 = new Cure();
-		src->learnMateria(p_i1);
-		src->learnMateria(p_c1);
+		src->learnMateria(new Ice());
+		src->learnMateria(new Cure());
 
 		ICharacter	*me = new Character("me");
 
@@ -170,14 +242,14 @@ int	main()
 		me->use(0, *bob);
 		me->use(1, *bob);
 
-		delete src;
-		delete me;
 		delete bob;
-		delete p_i1;
-		delete p_c1;
+		delete me;
+		delete src;
 	}
 
 	std::cout << std::endl;
 
 	PRINT_SECTION("=== DESTRUCTING ===");
+
+	return (0);
 }

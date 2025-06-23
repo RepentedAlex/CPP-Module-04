@@ -2,6 +2,7 @@ NAME		=	Materia
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 CXXFLAGS	+=	-g3
+CXXFLAGS	+=	-MMD -MP
 CXXFLAGS	+=	-Iinclude
 
 BUI_DIR		=	build/
@@ -59,5 +60,7 @@ fclean: clean
 	@rm -rf $(NAME)
 
 re: fclean all
+
+-include $(OBJ:.o=.d)
 
 .PHONY: all clean fclean re

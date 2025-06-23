@@ -24,7 +24,7 @@ Ice &Ice::operator=(const Ice &original)
 {
 	if (this != &original)
 	{
-		this->_type = original._type;
+		this->_type = original._type; // Useless ??
 	}
 	return (*this);
 }

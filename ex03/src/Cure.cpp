@@ -24,7 +24,7 @@ Cure &Cure::operator=(const Cure &original)
 {
 	if (this != &original)
 	{
-		this->_type = original._type;
+		this->_type = original._type; // Useless ??
 	}
 	return (*this);
 }
